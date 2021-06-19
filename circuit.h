@@ -20,9 +20,6 @@ class Circuit {
     public:
     Circuit() = default;
     void addNode(string label, float voltage);
-    static void gaussSeidel(vector<vector<float>> a, vector<float> b, int m, vector<float> x);
-    static void printMatrix(vector<vector<float>> mat, int n, int m);
-    vector<vector<float>> initMatrix(int n, int m);
 
     void setGND(Node* g);
     Node* getGND();

@@ -1,0 +1,9 @@
+* E:\PROJECTS\circuit_graph\CODE\circuit.asc
+V1 1 0 9
+R1 1 0 1K
+R2 1 0 2K
+R3 N001 1 250
+R4 0 N001 500
+.tran 1
+.backanno
+.end
