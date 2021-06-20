@@ -13,7 +13,7 @@ using namespace std;
 // HELPER FUNCTIONS
 void printMatrix(vector<vector<float>> mat, int n, int m);
 void gaussJordan(vector<vector<float>> a, int n);
-void findSolution(vector <vector<float>> coeff, int n);
+vector<float> findSolution(vector <vector<float>> coeff, int n);
 void gaussSeidel(vector<vector<float>> a, int n, int l, vector<float> b, int m, vector<float> x);
 float determinant(vector<vector<float>> matrix, int n);
 vector<vector<float>> initMatrix(int n, int m);
@@ -215,7 +215,11 @@ void Circuit::nodal() {
     printMatrix(A, n+m, n+m);
     cout << "------------------" << endl;
     cout << "Solutions: " << endl;
-    findSolution(A, n+m);
+    vector<float> x = findSolution(A, n+m);
+    for (int i = 0; i < vnodes.size(); i++) {
+        cout << vnodes[i]->getLabel() << " = " << x[i] << endl;
+    }
+    cout << "Total Current = " << x[x.size()-1] << endl;
 }
 
 vector<vector<float>> initMatrix(int n, int m) {
@@ -300,50 +304,43 @@ float determinant(vector<vector<float>> A, int n)
    return det;
 }
 
-void findSolution(vector <vector<float>> coeff, int n)
+vector<float> findSolution(vector <vector<float>> coeff, int n)
 {
     // Matrix d using coeff as given in cramer's rule
-    vector<vector<float>> d = initMatrix(n, n);
-    vector<vector<float>> d1 = initMatrix(n, n);
-    vector<vector<float>> d2 = initMatrix(n, n);
-    vector<vector<float>> d3 = initMatrix(n, n);
+    vector<vector<vector<float>>> dets;
+    vector<float> x;
+    for (int i = 0; i < n+1; i++) {
+        vector<vector<float>> d = initMatrix(n, n);
+        dets.push_back(d);
+    }
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            d[i][j] = coeff[i][j];
-            d1[i][j] = coeff[i][j];
-            d2[i][j] = coeff[i][j];
-            d3[i][j] = coeff[i][j];
+            for (int k = 0; k < dets.size(); k++) {
+                dets[k][i][j] = coeff[i][j];
+            }
         }
     }
 
     for (int i = 0; i < n; i++) {
-        d1[i][0] = coeff[i][3];
-        d2[i][1] = coeff[i][3];
-        d3[i][2] = coeff[i][3];
+        //d1[i][0] = coeff[i][3];
+        //d2[i][1] = coeff[i][3];
+        //d3[i][2] = coeff[i][3];
+        for (int j = 1; j < dets.size(); j++) {
+                dets[j][i][j-1] = coeff[i][n];
+            }
     }
     // Calculating Determinant of Matrices d, d1, d2, d3
-    float D = determinant(d, n);
-    float D1 = determinant(d1,  n);
-    float D2 = determinant(d2,  n);
-    float D3 = determinant(d3,  n);
- 
-    // Case 1
-    if (D != 0) {
-        // Coeff have a unique solution. Apply Cramer's Rule
-        float x = D1 / D;
-        float y = D2 / D;
-        float z = D3 / D; // calculating z using cramer's rule
-        printf("Value of x is : %lf\n", x);
-        printf("Value of y is : %lf\n", y);
-        printf("Value of z is : %lf\n", z);
+    float D = determinant(dets[0], n);
+    if (D==0) {
+        cout << "No solution or infinite solutions" << endl;
+        return x;
     }
-    // Case 2
-    else {
-        if (D1 == 0 && D2 == 0 && D3 == 0)
-            printf("Infinite solutions\n");
-        else if (D1 != 0 || D2 != 0 || D3 != 0)
-            printf("No solutions\n");
+    for (int i = 1; i < dets.size(); i++) {
+        float Dx = determinant(dets[i], n) / D;
+        x.push_back(Dx);
+        //cout << "x" << i << " = " << Dx << endl;
     }
+    return x;
 }
 
 void gaussJordan(vector<vector<float>> a, int n) {

@@ -10,7 +10,14 @@
 
 using namespace std;
 
+void Circuit1(void);
+void Circuit2(void);
 int main(void) {
+    Circuit1();
+    //Circuit2();
+}
+
+void Circuit1(void) {
     Circuit circuit;
     circuit.addNode("GND", 0);
     circuit.addNode("VCC", 9);
@@ -26,9 +33,22 @@ int main(void) {
 
     circuit.printCircuit();
     circuit.nodal();
-    //circuit.currentKCL();
 }
 
-//void inputCircuit(string fname) {
-//
-//}
+void Circuit2(void) {
+    Circuit circuit;
+    circuit.addNode("GND", 0);
+    circuit.addNode("VCC", 9);
+    circuit.addNode("A");
+    circuit.addNode("O");
+    circuit.setGND(circuit.findNode("GND"));
+
+    circuit.addVS("VS", 9, circuit.findNode("VCC"), circuit.findNode("GND"));    
+    circuit.addRes("R1", 3, circuit.findNode("VCC"), circuit.findNode("A"));
+    circuit.addRes("R2", 6, circuit.findNode("A"), circuit.findNode("GND"));
+    circuit.addRes("R3", 2, circuit.findNode("A"), circuit.findNode("O"));
+    circuit.addRes("R4", 4, circuit.findNode("O"), circuit.findNode("GND"));
+
+    circuit.printCircuit();
+    circuit.nodal();
+}
