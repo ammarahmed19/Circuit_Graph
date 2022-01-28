@@ -115,4 +115,4 @@ Which is a correct output because it is identical to the solution from LTSpice
 
 # Video
 
-<iframe src="https://drive.google.com/file/d/1ENeIBy3wX_MymQOL6J_eMppwXk3FHja7/preview" width="640" height="480" allow="autoplay"></iframe>
+![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://drive.google.com/file/d/1ENeIBy3wX_MymQOL6J_eMppwXk3FHja7/view?usp=sharing)
