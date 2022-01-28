@@ -70,8 +70,9 @@ class Circuit {
 ```
 # Testing Case
 
-
 We want to test and simulate the above circuit using our Algorithm.
+
+![Circuit](https://github.com/ammarahmed19/Circuit_Graph/blob/main/gallery/img1.png)
 
 The results from LTSpice tells us that the VCC voltage = 9V, and the Voltage at Node A = 6V, and the total current in the circuit equals = -0.025500 A
 
@@ -109,5 +110,9 @@ int main(void) {
 
 This is the output from our program
 
-
+![Result](https://github.com/ammarahmed19/Circuit_Graph/blob/main/gallery/img2.png)
 Which is a correct output because it is identical to the solution from LTSpice
+
+# Video
+
+<iframe src="https://drive.google.com/file/d/1ENeIBy3wX_MymQOL6J_eMppwXk3FHja7/preview" width="640" height="480" allow="autoplay"></iframe>
