@@ -115,4 +115,4 @@ Which is a correct output because it is identical to the solution from LTSpice
 
 # Video
 
-![Watch the video](https://github.com/ammarahmed19/Circuit_Graph/blob/main/gallery/img2.png)](https://drive.google.com/file/d/1ENeIBy3wX_MymQOL6J_eMppwXk3FHja7/view?usp=sharing)
+[![Watch the video](https://github.com/ammarahmed19/Circuit_Graph/blob/main/gallery/img3png.png)](https://drive.google.com/file/d/1ENeIBy3wX_MymQOL6J_eMppwXk3FHja7/view?usp=sharing)
